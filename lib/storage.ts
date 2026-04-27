@@ -61,3 +61,32 @@ export function getRecentMessages(): number[] {
 export function setRecentMessages(indexes: number[]): void {
   setItem(KEYS.recentMessages, indexes)
 }
+
+function todayString(): string {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+function yesterdayString(): string {
+  const d = new Date()
+  d.setDate(d.getDate() - 1)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+// セッション完了時に呼ぶ。ストリークを更新して新しい値を返す。
+// 同日2回目以降は冪等(値変更なし)。
+export function completeSession(): number {
+  if (typeof window === 'undefined') return getStreak()
+
+  const today = todayString()
+  const last = getLastCompletedDate()
+
+  if (last === today) {
+    return getStreak()
+  }
+
+  const newStreak = last === yesterdayString() ? getStreak() + 1 : 1
+  setStreak(newStreak)
+  setLastCompletedDate(today)
+  return newStreak
+}
