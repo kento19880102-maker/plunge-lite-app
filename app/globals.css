@@ -1,26 +1,214 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Landing page colors (Material Design 3) ── */
+  --color-primary: #245f95;
+  --color-on-primary: #ffffff;
+  --color-on-primary-fixed: #001d36;
+  --color-on-primary-fixed-variant: #00497d;
+  --color-primary-fixed: #d1e4ff;
+  --color-primary-fixed-dim: #9fcaff;
+  --color-primary-container: #4277b0;
+  --color-secondary: #49607e;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #c4dcff;
+  --color-secondary-fixed: #d2e4ff;
+  --color-secondary-fixed-dim: #b0c8eb;
+  --color-on-secondary-fixed: #001c37;
+  --color-on-secondary-fixed-dim: #314865;
+  --color-on-secondary-container: #49617f;
+  --color-tertiary: #5b5c5c;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #747475;
+  --color-tertiary-fixed: #e3e2e2;
+  --color-tertiary-fixed-dim: #c7c6c6;
+  --color-on-tertiary-fixed: #1b1c1c;
+  --color-on-tertiary-fixed-variant: #464747;
+  --color-on-tertiary-container: #fefcfc;
+  --color-background: #f9f9f7;
+  --color-on-background: #1a1c1b;
+  --color-surface: #f9f9f7;
+  --color-surface-bright: #f9f9f7;
+  --color-surface-dim: #dadad8;
+  --color-surface-variant: #e2e3e1;
+  --color-surface-tint: #276198;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f4f2;
+  --color-surface-container: #eeeeec;
+  --color-surface-container-high: #e8e8e6;
+  --color-surface-container-highest: #e2e3e1;
+  --color-on-surface: #1a1c1b;
+  --color-on-surface-variant: #42474f;
+  --color-inverse-surface: #2f3130;
+  --color-inverse-on-surface: #f1f1ef;
+  --color-inverse-primary: #9fcaff;
+  --color-outline: #727781;
+  --color-outline-variant: #c2c7d1;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* ── App colors ── */
+  --color-foreground: #1a1c1b;
+  --color-foreground-muted: #444748;
+  --color-foreground-subtle: #8a8a85;
+  --color-warm-accent: #d97757;
+  --color-cold-accent: #5a7a8a;
+  --color-divider: #e5e5e0;
+
+  /* ── Fonts ── */
+  /* Override Tailwind defaults so font-serif / font-sans use our custom fonts */
+  --font-serif: var(--font-noto-serif-jp), "Noto Serif JP", serif;
+  --font-sans: var(--font-noto-sans-jp), "Noto Sans JP", sans-serif;
+  --font-headline: var(--font-noto-serif-jp), "Noto Serif", serif;
+  --font-body: var(--font-noto-sans-jp), var(--font-inter), sans-serif;
+  --font-label: var(--font-inter), sans-serif;
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.0625rem;
+  --radius: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+
+  /* ── Spacing tokens ──
+     NOTE: --spacing-sm/md/lg/xl は Tailwind v4 の max-w-sm/md/lg/xl と
+     衝突するため使用しない。pt-lg / pb-xl 等は下の @utility で定義する。 */
+  --spacing-unit: 0.25rem;       /* 4px  → mt-unit, gap-unit など */
+  --spacing-xs: 0.5rem;          /* 8px  → mt-xs, gap-xs など */
+  --spacing-safe-margin: 2rem;   /* 32px → px-safe-margin など */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── App spacing utilities (sm/md/lg/xl は max-w-* 衝突回避のため @utility で定義) ── */
+@utility mt-sm  { margin-top:    1rem; }
+@utility mb-sm  { margin-bottom: 1rem; }
+@utility mt-md  { margin-top:    1.5rem; }
+@utility my-md  { margin-block:  1.5rem; }
+@utility pt-lg  { padding-top:    2.5rem; }
+@utility mt-lg  { margin-top:     2.5rem; }
+@utility mb-lg  { margin-bottom:  2.5rem; }
+@utility pt-xl  { padding-top:    4rem; }
+@utility pb-xl  { padding-bottom: 4rem; }
+@utility mt-xl  { margin-top:     4rem; }
+@utility mb-xl  { margin-bottom:  4rem; }
+
+/* ── Typography scale ── */
+@utility text-headline-lg {
+  font-family: var(--font-noto-serif-jp), "Noto Serif JP", serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.05em;
+  font-weight: 400;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@utility text-label-sm {
+  font-family: var(--font-noto-sans-jp), "Noto Sans JP", sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+@utility text-body-md {
+  font-family: var(--font-noto-sans-jp), "Noto Sans JP", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+@utility text-button-text {
+  font-family: var(--font-noto-sans-jp), "Noto Sans JP", sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+@utility text-timer-display {
+  font-family: var(--font-noto-serif-jp), "Noto Serif JP", serif;
+  font-size: 5rem;
+  line-height: 6.25rem;
+  letter-spacing: -0.02em;
+  font-weight: 300;
+}
+
+@utility text-timer-display-large {
+  font-family: var(--font-noto-serif-jp), "Noto Serif JP", serif;
+  font-size: 7.5rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 300;
+}
+
+@utility text-completion-message {
+  font-family: var(--font-noto-serif-jp), "Noto Serif JP", serif;
+  font-size: 2.25rem;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  font-weight: 300;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9f9f7;
+}
+
+/* ── Range slider styles ── */
+input[type="range"].warm-slider,
+input[type="range"].cold-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+/* WebKit track */
+input[type="range"].warm-slider::-webkit-slider-runnable-track,
+input[type="range"].cold-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  background: #e5e5e0;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+/* WebKit thumb */
+input[type="range"].warm-slider::-webkit-slider-thumb,
+input[type="range"].cold-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #1a1c1b;
+  cursor: pointer;
+  margin-top: -7px;
+}
+
+/* Firefox track */
+input[type="range"].warm-slider::-moz-range-track,
+input[type="range"].cold-slider::-moz-range-track {
+  width: 100%;
+  height: 2px;
+  background: #e5e5e0;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* Firefox thumb */
+input[type="range"].warm-slider::-moz-range-thumb,
+input[type="range"].cold-slider::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #1a1c1b;
+  cursor: pointer;
+  box-sizing: border-box;
 }
