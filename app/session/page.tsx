@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { getHotDuration, getColdDuration } from '@/lib/storage'
 import { playSwitchSound, playCompleteSound } from '@/lib/sound'
+import { requestWakeLock, releaseWakeLock, setupVisibilityHandler } from '@/lib/wakeLock'
 import WarmPhase from './WarmPhase'
 import SwitchingPhase from './SwitchingPhase'
 import ColdPhase from './ColdPhase'
@@ -50,12 +51,29 @@ export default function SessionPage() {
     }
   }, [phase])
 
+  // Wake Lock: セッション開始時に取得、unmount 時に解放
+  useEffect(() => {
+    requestWakeLock()
+    const cleanupVisibility = setupVisibilityHandler()
+    return () => {
+      releaseWakeLock()
+      cleanupVisibility()
+    }
+  }, [])
+
+  // 音 + 完了時の Wake Lock 解放
   useEffect(() => {
     if (phase === 'switching') playSwitchSound()
-    if (phase === 'complete') playCompleteSound()
+    if (phase === 'complete') {
+      playCompleteSound()
+      releaseWakeLock()
+    }
   }, [phase])
 
-  const handleAbort = () => router.push('/')
+  const handleAbort = () => {
+    releaseWakeLock()
+    router.push('/')
+  }
 
   if (phase === 'warm') return <WarmPhase remaining={remaining} onAbort={handleAbort} />
   if (phase === 'switching') return <SwitchingPhase />
