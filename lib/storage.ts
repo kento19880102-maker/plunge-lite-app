@@ -3,7 +3,6 @@ const KEYS = {
   coldDuration: 'plunge_cold_duration',
   streak: 'plunge_streak',
   lastCompletedDate: 'plunge_last_completed_date',
-  recentMessages: 'plunge_recent_messages',
 } as const
 
 function getItem<T>(key: string, defaultValue: T): T {
@@ -52,14 +51,6 @@ export function getLastCompletedDate(): string {
 
 export function setLastCompletedDate(date: string): void {
   setItem(KEYS.lastCompletedDate, date)
-}
-
-export function getRecentMessages(): number[] {
-  return getItem<number[]>(KEYS.recentMessages, [])
-}
-
-export function setRecentMessages(indexes: number[]): void {
-  setItem(KEYS.recentMessages, indexes)
 }
 
 function todayString(): string {
