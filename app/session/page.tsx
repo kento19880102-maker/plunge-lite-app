@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { getHotDuration, getColdDuration } from '@/lib/storage'
+import { playSwitchSound, playCompleteSound } from '@/lib/sound'
 import WarmPhase from './WarmPhase'
 import SwitchingPhase from './SwitchingPhase'
 import ColdPhase from './ColdPhase'
@@ -47,6 +48,11 @@ export default function SessionPage() {
       clearInterval(intervalId)
       clearTimeout(timeoutId)
     }
+  }, [phase])
+
+  useEffect(() => {
+    if (phase === 'switching') playSwitchSound()
+    if (phase === 'complete') playCompleteSound()
   }, [phase])
 
   const handleAbort = () => router.push('/')

@@ -9,6 +9,7 @@ import {
   setColdDuration,
   getStreak,
 } from '@/lib/storage'
+import { initAudio } from '@/lib/sound'
 
 function formatDuration(seconds: number): string {
   const m = Math.floor(seconds / 60)
@@ -109,7 +110,7 @@ export default function Home() {
       {/* アクションエリア */}
       <div className="w-full max-w-[28rem] px-safe-margin flex flex-col items-center mt-xl">
         <button
-          onClick={() => router.push('/session')}
+          onClick={() => { initAudio(); router.push('/session') }}
           className="w-4/5 h-12 border border-foreground text-foreground bg-transparent font-sans text-button-text hover:bg-surface-container-low transition-colors"
         >
           はじめる
