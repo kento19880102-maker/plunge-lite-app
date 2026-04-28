@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,6 +23,10 @@ const notoSerifJP = Noto_Serif_JP({
   weight: ["300", "400", "600"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: '#f9f9f7',
+}
 
 const siteUrl = 'https://plunge-lite.netlify.app'
 const title = 'Plunge Lite｜朝30秒で集中力が変わる'
@@ -60,6 +65,14 @@ export const metadata: Metadata = {
     description,
     images: ['/opengraph-image'],
   },
+  manifest: '/manifest.json',
+  icons: {
+    apple: '/apple-icon.png',
+  },
+  appleWebApp: {
+    title: 'Plunge Lite',
+    statusBarStyle: 'default',
+  },
   robots: {
     index: true,
     follow: true,
@@ -81,6 +94,7 @@ export default function RootLayout({
     >
       <body className="font-body text-on-surface antialiased min-h-full">
         {children}
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );
