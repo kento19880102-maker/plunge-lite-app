@@ -120,6 +120,29 @@ export default function Home() {
         </p>
       </div>
 
+      {/* フッターリンク */}
+      <div className="flex items-center gap-2 mt-16 pb-4">
+        <a
+          href="https://forms.gle/3uYqiuU5rDWioep58"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-sans text-[12px] text-foreground opacity-50 hover:opacity-80 transition-opacity cursor-pointer"
+          style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+        >
+          フィードバックを送る
+        </a>
+        <span className="text-foreground opacity-50 text-[12px]">|</span>
+        <a
+          href="https://plunge-lite.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-sans text-[12px] text-foreground opacity-50 hover:opacity-80 transition-opacity cursor-pointer"
+          style={{ fontFamily: "'Noto Sans JP', sans-serif" }}
+        >
+          サービスについて
+        </a>
+      </div>
+
     </div>
   )
 }
