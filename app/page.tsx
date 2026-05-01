@@ -133,7 +133,7 @@ export default function Home() {
         </a>
         <span className="text-foreground opacity-50 text-[12px]">|</span>
         <a
-          href="https://plunge-lite.netlify.app/"
+          href="https://plunge-lite.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="font-sans text-[12px] text-foreground opacity-50 hover:opacity-80 transition-opacity cursor-pointer"

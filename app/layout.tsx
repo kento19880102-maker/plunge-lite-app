@@ -28,7 +28,7 @@ export const viewport: Viewport = {
   themeColor: '#f9f9f7',
 }
 
-const siteUrl = 'https://plunge-lite.netlify.app'
+const siteUrl = 'https://plunge-lite.vercel.app'
 const title = 'Plunge Lite｜朝30秒で集中力が変わる'
 const description =
   '朝のぬるさを卒業。30秒の新習慣で、1日の集中力が変わる。現在、プロダクト開発にご協力いただけるβテスターを募集しています。'
